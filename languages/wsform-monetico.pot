@@ -1,0 +1,419 @@
+# Copyright (C) 2026 Willy Bahuaud
+# This file is distributed under the GPL-2.0-or-later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Paiement Monetico pour WS Form 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wsform-monetico\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-11-07T15:23:11+01:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: wsform-monetico\n"
+
+#. Plugin Name of the plugin
+#: wsform-monetico.php
+#: wsform-monetico.php:46
+msgid "Paiement Monetico pour WS Form"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: wsform-monetico.php
+msgid "https://github.com/willybahuaud/wsform-monetico"
+msgstr ""
+
+#. Description of the plugin
+#: wsform-monetico.php
+msgid "Ajoute une action de paiement par carte bancaire Monetico aux formulaires WS Form PRO."
+msgstr ""
+
+#. Author of the plugin
+#: wsform-monetico.php
+msgid "Willy Bahuaud"
+msgstr ""
+
+#. Author URI of the plugin
+#: wsform-monetico.php
+msgid "https://wabeo.fr/"
+msgstr ""
+
+#: includes/admin/class-settings-page.php:56
+#: templates/admin-settings.php:25
+msgid "Comptes Monetico"
+msgstr ""
+
+#: includes/admin/class-settings-page.php:57
+msgid "Monetico"
+msgstr ""
+
+#. translators: %s: TPE number as typed by the user.
+#: includes/admin/class-settings-page.php:160
+#, php-format
+msgid "Compte %s non enregistré : vérifiez le TPE, le code société et la clé (40 caractères hexadécimaux)."
+msgstr ""
+
+#: includes/blocks/class-payment-status-block.php:130
+msgid "Paiement introuvable."
+msgstr ""
+
+#. translators: %s: payment reference.
+#: includes/blocks/class-payment-status-block.php:132
+#: templates/redirect-monetico.php:104
+#, php-format
+msgid "Référence : %s"
+msgstr ""
+
+#: includes/blocks/class-payment-status-block.php:174
+msgid "Montant"
+msgstr ""
+
+#: includes/blocks/class-payment-status-block.php:175
+msgid "Date de paiement"
+msgstr ""
+
+#: includes/blocks/class-payment-status-block.php:176
+msgid "Autorisation"
+msgstr ""
+
+#: includes/blocks/class-payment-status-block.php:191
+#: includes/class-submission-list.php:104
+msgid "Payé"
+msgstr ""
+
+#: includes/blocks/class-payment-status-block.php:192
+#: includes/class-submission-list.php:105
+msgid "Échoué"
+msgstr ""
+
+#: includes/blocks/class-payment-status-block.php:193
+#: includes/class-submission-list.php:103
+#: assets/js/blocks/payment-status-block.js:73
+msgid "En attente"
+msgstr ""
+
+#: includes/blocks/class-payment-status-block.php:196
+msgid "Inconnu"
+msgstr ""
+
+#: includes/blocks/class-payment-status-block.php:209
+msgid "Merci, votre paiement est confirmé."
+msgstr ""
+
+#: includes/blocks/class-payment-status-block.php:210
+msgid "Le paiement n’a pas été finalisé."
+msgstr ""
+
+#: includes/blocks/class-payment-status-block.php:211
+msgid "Votre paiement est en cours de validation."
+msgstr ""
+
+#: includes/class-action-handler.php:107
+#: includes/class-action-handler.php:108
+msgid "Paiement Monetico"
+msgstr ""
+
+#: includes/class-action-handler.php:128
+#: includes/class-action-handler.php:156
+msgid "Le paiement n’a pas pu être lancé. Merci de réessayer ou de contacter le site."
+msgstr ""
+
+#: includes/class-action-handler.php:138
+#: templates/redirect-monetico.php:92
+msgid "Redirection vers la page de paiement sécurisée…"
+msgstr ""
+
+#: includes/class-action-settings-fields.php:27
+msgid "Variables : {reference}, {amount}, {date}, {form_name}, {submission_id}, {field:ID}"
+msgstr ""
+
+#: includes/class-action-settings-fields.php:31
+msgid "Compte Monetico (TPE)"
+msgstr ""
+
+#: includes/class-action-settings-fields.php:34
+#: includes/class-action-settings-fields.php:68
+#: includes/class-action-settings-fields.php:76
+msgid "Sélectionner…"
+msgstr ""
+
+#: includes/class-action-settings-fields.php:35
+msgid "Les comptes se déclarent dans WS Form > Monetico, ou dans wp-config.php."
+msgstr ""
+
+#: includes/class-action-settings-fields.php:38
+msgid "Environnement"
+msgstr ""
+
+#: includes/class-action-settings-fields.php:43
+msgid "Test"
+msgstr ""
+
+#: includes/class-action-settings-fields.php:47
+msgid "Production"
+msgstr ""
+
+#: includes/class-action-settings-fields.php:53
+msgid "Devise"
+msgstr ""
+
+#: includes/class-action-settings-fields.php:59
+msgid "Langue de la page de paiement"
+msgstr ""
+
+#: includes/class-action-settings-fields.php:65
+msgid "Champ montant"
+msgstr ""
+
+#: includes/class-action-settings-fields.php:69
+msgid "Champ qui contient le montant TTC à payer."
+msgstr ""
+
+#: includes/class-action-settings-fields.php:73
+msgid "Champ e-mail du payeur"
+msgstr ""
+
+#: includes/class-action-settings-fields.php:80
+msgid "Texte libre (optionnel)"
+msgstr ""
+
+#: includes/class-action-settings-fields.php:82
+msgid "Renvoyé par Monetico et visible dans votre back-office. Un champ s’insère avec {{field:ID}}."
+msgstr ""
+
+#: includes/class-action-settings-fields.php:83
+msgid "Devis {{field:12}}"
+msgstr ""
+
+#: includes/class-action-settings-fields.php:86
+msgid "URL de retour après paiement (optionnelle)"
+msgstr ""
+
+#: includes/class-action-settings-fields.php:91
+msgid "URL de retour après échec (optionnelle)"
+msgstr ""
+
+#: includes/class-action-settings-fields.php:96
+msgid "Envoyer un e-mail de confirmation au payeur"
+msgstr ""
+
+#: includes/class-action-settings-fields.php:100
+msgid "Sujet de l’e-mail au payeur"
+msgstr ""
+
+#: includes/class-action-settings-fields.php:106
+msgid "Contenu de l’e-mail au payeur (HTML)"
+msgstr ""
+
+#: includes/class-action-settings-fields.php:112
+msgid "Envoyer un e-mail à l’équipe"
+msgstr ""
+
+#: includes/class-action-settings-fields.php:116
+msgid "Sujet de l’e-mail à l’équipe"
+msgstr ""
+
+#: includes/class-action-settings-fields.php:122
+msgid "Contenu de l’e-mail à l’équipe (HTML)"
+msgstr ""
+
+#: includes/class-action-settings-fields.php:128
+msgid "Destinataires de l’e-mail à l’équipe"
+msgstr ""
+
+#: includes/class-action-settings-fields.php:133
+msgid "Nom de l’expéditeur"
+msgstr ""
+
+#: includes/class-action-settings-fields.php:138
+msgid "Adresse de l’expéditeur"
+msgstr ""
+
+#: includes/class-email-sender.php:37
+msgid "Confirmation de paiement {reference}"
+msgstr ""
+
+#: includes/class-email-sender.php:38
+msgid "Votre paiement {reference} de {amount} a bien été reçu le {date}. Merci !"
+msgstr ""
+
+#: includes/class-email-sender.php:39
+msgid "Nouveau paiement {reference}"
+msgstr ""
+
+#: includes/class-email-sender.php:42
+msgid "Paiement reçu."
+msgstr ""
+
+#: includes/class-email-sender.php:43
+msgid "Référence : {reference}"
+msgstr ""
+
+#: includes/class-email-sender.php:44
+msgid "Montant : {amount}"
+msgstr ""
+
+#: includes/class-email-sender.php:45
+msgid "Date : {date}"
+msgstr ""
+
+#: includes/class-email-sender.php:46
+msgid "Formulaire : {form_name}"
+msgstr ""
+
+#: includes/class-redirect-page.php:107
+msgid "Ce lien de paiement n’est pas valide."
+msgstr ""
+
+#: includes/class-redirect-page.php:114
+msgid "Ce paiement a déjà été effectué."
+msgstr ""
+
+#: includes/class-redirect-page.php:120
+#: includes/class-redirect-page.php:137
+msgid "Le paiement ne peut pas être préparé. Contactez le site."
+msgstr ""
+
+#: includes/class-submission-list.php:53
+msgid "Statut paiement"
+msgstr ""
+
+#: includes/class-submission-list.php:54
+msgid "Référence Monetico"
+msgstr ""
+
+#: includes/class-submission-list.php:108
+msgid "N/A"
+msgstr ""
+
+#: includes/updater/class-updater.php:194
+msgid "Impossible de renommer le dossier du plugin pendant la mise à jour."
+msgstr ""
+
+#: includes/updater/class-updater.php:206
+msgid "Aucune note de version."
+msgstr ""
+
+#: templates/admin-settings.php:29
+msgid "URL de l’interface retour (IPN) à communiquer à Monetico :"
+msgstr ""
+
+#: templates/admin-settings.php:34
+msgid "Comptes déclarés dans wp-config.php"
+msgstr ""
+
+#: templates/admin-settings.php:35
+msgid "Ces comptes sont prioritaires sur ceux de cette page pour le même TPE."
+msgstr ""
+
+#: templates/admin-settings.php:43
+msgid "Comptes enregistrés ici"
+msgstr ""
+
+#: templates/admin-settings.php:44
+msgid "La clé enregistrée n’est jamais réaffichée. Laissez le champ vide pour la conserver."
+msgstr ""
+
+#: templates/admin-settings.php:51
+msgid "TPE"
+msgstr ""
+
+#: templates/admin-settings.php:52
+#: templates/admin-settings.php:73
+msgid "Code société"
+msgstr ""
+
+#: templates/admin-settings.php:53
+#: templates/admin-settings.php:76
+msgid "Clé de sécurité"
+msgstr ""
+
+#: templates/admin-settings.php:54
+msgid "Supprimer"
+msgstr ""
+
+#: templates/admin-settings.php:66
+msgid "Nouveau TPE"
+msgstr ""
+
+#: templates/admin-settings.php:76
+msgid "Clé enregistrée"
+msgstr ""
+
+#: templates/admin-settings.php:80
+msgid "Supprimer ce compte"
+msgstr ""
+
+#: templates/redirect-monetico.php:19
+msgid "Paiement indisponible"
+msgstr ""
+
+#: templates/redirect-monetico.php:19
+msgid "Redirection vers Monetico"
+msgstr ""
+
+#: templates/redirect-monetico.php:97
+msgid "Continuer vers le paiement"
+msgstr ""
+
+#: wsform-monetico.php:78
+msgid "Paiement Monetico pour WS Form a besoin de WS Form PRO pour fonctionner."
+msgstr ""
+
+#: assets/js/blocks/payment-status-block.js:15
+msgid "Statut de paiement Monetico"
+msgstr ""
+
+#: assets/js/blocks/payment-status-block.js:16
+msgid "Affiche le statut d’un paiement Monetico à partir de sa référence."
+msgstr ""
+
+#: assets/js/blocks/payment-status-block.js:54
+msgid "Affichage"
+msgstr ""
+
+#: assets/js/blocks/payment-status-block.js:56
+msgid "Référence de paiement"
+msgstr ""
+
+#: assets/js/blocks/payment-status-block.js:57
+msgid "Laisser vide pour utiliser automatiquement ?reference= dans l’URL."
+msgstr ""
+
+#: assets/js/blocks/payment-status-block.js:62
+msgid "Afficher les détails"
+msgstr ""
+
+#: assets/js/blocks/payment-status-block.js:67
+msgid "Type de message"
+msgstr ""
+
+#: assets/js/blocks/payment-status-block.js:70
+msgid "Automatique"
+msgstr ""
+
+#: assets/js/blocks/payment-status-block.js:71
+msgid "Succès"
+msgstr ""
+
+#: assets/js/blocks/payment-status-block.js:72
+msgid "Échec"
+msgstr ""
+
+#: assets/js/blocks/payment-status-block.js:88
+msgid "Aperçu"
+msgstr ""
+
+#: assets/js/blocks/payment-status-block.js:96
+msgid "Statut du paiement affiché sur le site."
+msgstr ""
+
+#: assets/js/blocks/payment-status-block.js:102
+msgid "Référence : "
+msgstr ""
+
+#: assets/js/blocks/payment-status-block.js:103
+msgid "Référence récupérée automatiquement depuis l’URL."
+msgstr ""

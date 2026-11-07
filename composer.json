@@ -1,0 +1,30 @@
+{
+    "name": "wabeo/wsform-monetico",
+    "description": "Monetico card payments for WS Form PRO forms.",
+    "type": "wordpress-plugin",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Willy Bahuaud",
+            "homepage": "https://wabeo.fr/"
+        }
+    ],
+    "require": {
+        "php": ">=7.4"
+    },
+    "require-dev": {
+        "phpcompatibility/phpcompatibility-wp": "^2.1",
+        "phpunit/phpunit": "^9.6",
+        "wp-coding-standards/wpcs": "^3.1"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    },
+    "scripts": {
+        "lint": "phpcs -q",
+        "test": "phpunit",
+        "build": "bin/build-zip.sh"
+    }
+}

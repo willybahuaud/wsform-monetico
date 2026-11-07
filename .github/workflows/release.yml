@@ -1,0 +1,57 @@
+# Publishes a release with the plugin archive when a vX.Y.Z tag is pushed.
+#
+# The updater only offers releases that carry wsform-monetico-X.Y.Z.zip and
+# reads the requirements from the "Requires ..." lines of the notes.
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check that the tag matches the plugin version
+        run: |
+          tag_version="${GITHUB_REF_NAME#v}"
+          header_version="$(sed -n 's/^ \* Version: *//p' wsform-monetico.php | tr -d '[:space:]')"
+          constant_version="$(sed -n "s/.*const VERSION = '\(.*\)';/\1/p" includes/class-plugin.php)"
+          stable_tag="$(sed -n 's/^Stable tag: *//p' readme.txt | tr -d '[:space:]')"
+          echo "tag=$tag_version header=$header_version constant=$constant_version stable=$stable_tag"
+          if [[ "$tag_version" != "$header_version" || "$tag_version" != "$constant_version" || "$tag_version" != "$stable_tag" ]]; then
+            echo "::error::Tag $GITHUB_REF_NAME does not match the plugin version."
+            exit 1
+          fi
+
+      - name: Install development tools
+        run: composer install --no-interaction --no-progress
+
+      - name: Coding standards
+        run: vendor/bin/phpcs -q
+
+      - name: Unit tests
+        run: vendor/bin/phpunit
+
+      - name: Build the archive
+        run: bin/build-zip.sh
+
+      - name: Publish the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          requires="$(sed -n 's/^ \* Requires at least: *//p' wsform-monetico.php | tr -d '[:space:]')"
+          requires_php="$(sed -n 's/^ \* Requires PHP: *//p' wsform-monetico.php | tr -d '[:space:]')"
+          tested="$(sed -n 's/^Tested up to: *//p' readme.txt | tr -d '[:space:]')"
+          printf 'Requires at least: %s\nRequires PHP: %s\nTested up to: %s\n' "$requires" "$requires_php" "$tested" > requirements.md
+          gh release create "$GITHUB_REF_NAME" \
+            "dist/wsform-monetico-${GITHUB_REF_NAME#v}.zip" \
+            --title "$GITHUB_REF_NAME" \
+            --generate-notes \
+            --notes-file requirements.md

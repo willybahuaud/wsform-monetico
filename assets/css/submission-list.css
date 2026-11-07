@@ -1,0 +1,52 @@
+.wsf-monetico-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 1.2;
+    border: 1px solid transparent;
+}
+
+.wsf-monetico-status-pending {
+    background: #fff5d8;
+    color: #8a6d1d;
+    border-color: #dba617;
+}
+
+.wsf-monetico-status-paid {
+    background: #e5f7ed;
+    color: #005c20;
+    border-color: #00a32a;
+}
+
+.wsf-monetico-status-failed {
+    background: #fdeaea;
+    color: #a60008;
+    border-color: #d63638;
+}
+
+.wsf-monetico-status-na {
+    background: #f6f7f7;
+    color: #50575e;
+    border-color: #c3c4c7;
+}
+
+td.column-_wsform_monetico_payment_status {
+    white-space: nowrap;
+}
+
+td.column-_wsform_monetico_payment_reference code.wsf-monetico-reference {
+    background: transparent;
+    padding: 0;
+    color: #1d2327;
+    font-size: 12px;
+}
+
+@media (max-width: 782px) {
+    .wsf-monetico-badge {
+        width: 100%;
+        justify-content: center;
+    }
+}

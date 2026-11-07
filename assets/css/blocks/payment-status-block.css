@@ -1,0 +1,133 @@
+.wsf-monetico-status-block {
+    background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 100%);
+    border: 1px solid #d0d7e3;
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(12, 31, 53, 0.06);
+    color: #0f172a;
+    max-width: 720px;
+}
+
+.wsf-monetico-status-heading {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 12px;
+}
+
+.wsf-monetico-heading-text {
+    flex: 1;
+}
+
+.wsf-monetico-status-title {
+    margin: 0;
+    font-size: 20px;
+    line-height: 1.3;
+    font-weight: 700;
+}
+
+.wsf-monetico-status-subtitle {
+    margin: 4px 0 0;
+    color: #475569;
+    font-size: 14px;
+}
+
+.wsf-monetico-status-details {
+    margin: 0;
+    padding: 14px;
+    background: #fff;
+    border: 1px solid #dfe5f1;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 10px 16px;
+}
+
+.wsf-monetico-detail-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2px;
+}
+
+.wsf-monetico-detail-row dt {
+    margin: 0;
+    color: #64748b;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+.wsf-monetico-detail-row dd {
+    margin: 0;
+    font-weight: 600;
+    color: #0f172a;
+}
+
+.wsf-monetico-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 1.1;
+    border: 1px solid transparent;
+}
+
+.wsf-monetico-status-paid {
+    background: #e6f7ed;
+    color: #0f612e;
+    border-color: #45b36b;
+}
+
+.wsf-monetico-status-failed {
+    background: #fdecec;
+    color: #a60008;
+    border-color: #d63638;
+}
+
+.wsf-monetico-status-pending {
+    background: #fff5d8;
+    color: #8a6d1d;
+    border-color: #dba617;
+}
+
+.wsf-monetico-status-na {
+    background: #f3f4f6;
+    color: #475569;
+    border-color: #cbd5e1;
+}
+
+.wsf-monetico-block-editor {
+    border: 1px dashed #cbd5e1;
+    padding: 14px;
+    border-radius: 12px;
+    background: #f8fafc;
+}
+
+.wsf-monetico-block-preview {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.wsf-monetico-block-title {
+    margin: 0;
+    font-weight: 600;
+}
+
+.wsf-monetico-block-subtitle {
+    margin: 4px 0 0;
+    color: #475569;
+}
+
+@media (max-width: 640px) {
+    .wsf-monetico-status-heading {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .wsf-monetico-status-block {
+        padding: 16px;
+    }
+}

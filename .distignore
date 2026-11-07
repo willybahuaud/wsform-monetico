@@ -1,0 +1,16 @@
+# Excluded from the distributed archive, see bin/build-zip.sh.
+/.git
+/.github
+/.gitignore
+/.distignore
+/.phpunit.result.cache
+/bin
+/tests
+/vendor
+/node_modules
+/composer.json
+/composer.lock
+/phpcs.xml.dist
+/phpunit.xml.dist
+/README.md
+.DS_Store
