@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Plugin {
 
-	const VERSION = '1.0.0';
+	const VERSION = '1.0.1';
 
 	const PATH = WSFORM_MONETICO_PATH;
 

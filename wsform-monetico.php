@@ -3,7 +3,7 @@
  * Plugin Name:       Paiement Monetico pour WS Form
  * Plugin URI:        https://github.com/willybahuaud/wsform-monetico
  * Description:       Ajoute une action de paiement par carte bancaire Monetico aux formulaires WS Form PRO.
- * Version:           1.0.0
+ * Version:           1.0.1
  * Author:            Willy Bahuaud
  * Author URI:        https://wabeo.fr/
  * License:           GPL-2.0-or-later

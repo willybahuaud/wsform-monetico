@@ -4,7 +4,7 @@ Tags: ws form, monetico, payment, credit card, cic
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -43,6 +43,9 @@ WS Form PRO is required. This plugin is not affiliated with WS Form, Monetico, C
 In wp-content/uploads/wsform-monetico/logs/, one file per day, kept 30 days. File names end with a secret so that they cannot be guessed, and seals, keys, emails and IP addresses are never written.
 
 == Changelog ==
+
+= 1.0.1 =
+* Updates: requirements read from a manifest attached to the release, release notes rendered from Markdown, no false compatibility warning within a tested branch.
 
 = 1.0.0 =
 * First public release.
