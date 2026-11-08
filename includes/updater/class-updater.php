@@ -151,13 +151,29 @@ class Updater {
 			'homepage'      => $this->repository_url,
 			'requires'      => $release['requires'],
 			'requires_php'  => $release['requires_php'],
-			'tested'        => $release['tested'],
+			'tested'        => $this->get_tested_version( $release['tested'] ),
 			'last_updated'  => $release['published_at'],
 			'download_link' => $release['package'],
 			'sections'      => array(
-				'changelog' => $this->format_notes( $release['notes'] ),
+				'changelog' => Release_Notes::to_html( $release['notes'] ),
 			),
 		);
+	}
+
+	/**
+	 * Get the tested version shown in the details popup.
+	 *
+	 * "Tested up to: 7.1" covers the whole branch, but the popup compares
+	 * versions as they are and would wrongly warn on WordPress 7.1.4.
+	 *
+	 * @param string $tested Version declared by the release.
+	 *
+	 * @return string
+	 */
+	private function get_tested_version( $tested ) {
+		$wordpress_version = get_bloginfo( 'version' );
+
+		return '' !== $tested && 0 === strpos( $wordpress_version . '.', $tested . '.' ) ? $wordpress_version : $tested;
 	}
 
 	/**
@@ -192,22 +208,5 @@ class Updater {
 		}
 
 		return new WP_Error( 'wsform_monetico_rename_failed', __( 'Impossible de renommer le dossier du plugin pendant la mise à jour.', 'wsform-monetico' ) );
-	}
-
-	/**
-	 * Turn release notes into simple HTML.
-	 *
-	 * @param string $notes Release notes in Markdown.
-	 *
-	 * @return string
-	 */
-	private function format_notes( $notes ) {
-		if ( '' === trim( $notes ) ) {
-			return '<p>' . esc_html__( 'Aucune note de version.', 'wsform-monetico' ) . '</p>';
-		}
-
-		$html = preg_replace( '/^[-*] (.+)$/m', '<li>$1</li>', esc_html( $notes ) );
-
-		return wpautop( (string) $html );
 	}
 }

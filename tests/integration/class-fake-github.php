@@ -25,6 +25,17 @@ class WSForm_Monetico_Fake_Github {
 	public static $calls = 0;
 
 	/**
+	 * Requirements served as the manifest attached to every release.
+	 *
+	 * @var array<string,string>
+	 */
+	public static $manifest = array(
+		'requires'     => '6.2',
+		'requires_php' => '8.0',
+		'tested'       => '7.1',
+	);
+
+	/**
 	 * Answer HTTP requests instead of the network.
 	 *
 	 * Hooked to pre_http_request.
@@ -45,6 +56,10 @@ class WSForm_Monetico_Fake_Github {
 					'translations' => array(),
 				)
 			);
+		}
+
+		if ( 0 === strpos( $url, 'https://github.com/willybahuaud/wsform-monetico/releases/download/' ) && '.json' === substr( $url, -5 ) ) {
+			return self::response( 200, self::$manifest );
 		}
 
 		if ( 0 !== strpos( $url, 'https://api.github.com/repos/willybahuaud/wsform-monetico/' ) ) {
@@ -77,10 +92,11 @@ class WSForm_Monetico_Fake_Github {
 			),
 		);
 
-		if ( $with_archive ) {
+		$attached_files = $with_archive ? array( 'zip', 'json' ) : array( 'json' );
+		foreach ( $attached_files as $extension ) {
 			$assets[] = array(
-				'name'                 => 'wsform-monetico-' . $version . '.zip',
-				'browser_download_url' => 'https://github.com/willybahuaud/wsform-monetico/releases/download/' . $tag . '/wsform-monetico-' . $version . '.zip',
+				'name'                 => 'wsform-monetico-' . $version . '.' . $extension,
+				'browser_download_url' => 'https://github.com/willybahuaud/wsform-monetico/releases/download/' . $tag . '/wsform-monetico-' . $version . '.' . $extension,
 			);
 		}
 
@@ -88,7 +104,7 @@ class WSForm_Monetico_Fake_Github {
 			'tag_name'     => $tag,
 			'html_url'     => 'https://github.com/willybahuaud/wsform-monetico/releases/tag/' . $tag,
 			'published_at' => '2027-02-01T10:00:00Z',
-			'body'         => "- Fix something\n\nRequires at least: 6.2\nRequires PHP: 8.0\nTested up to: 7.1",
+			'body'         => "## What's Changed\n- Fix **something** in https://github.com/willybahuaud/wsform-monetico/pull/1\n\nFull Changelog: https://github.com/willybahuaud/wsform-monetico/compare/v1.0.0...v1.0.1",
 			'zipball_url'  => 'https://api.github.com/repos/willybahuaud/wsform-monetico/zipball/' . $tag,
 			'assets'       => $assets,
 		);

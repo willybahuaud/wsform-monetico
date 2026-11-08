@@ -1,7 +1,7 @@
 # Publishes a release with the plugin archive when a vX.Y.Z tag is pushed.
 #
-# The updater only offers releases that carry wsform-monetico-X.Y.Z.zip and
-# reads the requirements from the "Requires ..." lines of the notes.
+# The updater only offers releases that carry wsform-monetico-X.Y.Z.zip, and
+# reads the requirements from wsform-monetico-X.Y.Z.json.
 name: Release
 
 on:
@@ -16,7 +16,11 @@ jobs:
   release:
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      # Pinned to the v7.0.1 commit: a tag can move, and this job can publish.
+      # The write token does not stay in .git/config while Composer runs.
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
 
       - name: Check that the tag matches the plugin version
         run: |
@@ -46,12 +50,9 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          requires="$(sed -n 's/^ \* Requires at least: *//p' wsform-monetico.php | tr -d '[:space:]')"
-          requires_php="$(sed -n 's/^ \* Requires PHP: *//p' wsform-monetico.php | tr -d '[:space:]')"
-          tested="$(sed -n 's/^Tested up to: *//p' readme.txt | tr -d '[:space:]')"
-          printf 'Requires at least: %s\nRequires PHP: %s\nTested up to: %s\n' "$requires" "$requires_php" "$tested" > requirements.md
           gh release create "$GITHUB_REF_NAME" \
             "dist/wsform-monetico-${GITHUB_REF_NAME#v}.zip" \
+            "dist/wsform-monetico-${GITHUB_REF_NAME#v}.json" \
+            --verify-tag \
             --title "$GITHUB_REF_NAME" \
-            --generate-notes \
-            --notes-file requirements.md
+            --generate-notes

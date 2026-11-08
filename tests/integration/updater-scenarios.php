@@ -51,7 +51,7 @@ function wsform_monetico_test_updater_newer_release() {
 
 	WSForm_Monetico_Lab_Test::same( '9.0.0', $check['response']->new_version ?? '', 'updater: newer version offered' );
 	WSForm_Monetico_Lab_Test::same( 'https://github.com/willybahuaud/wsform-monetico/releases/download/v9.0.0/wsform-monetico-9.0.0.zip', $check['response']->package ?? '', 'updater: package is the built archive' );
-	WSForm_Monetico_Lab_Test::same( '8.0', $check['response']->requires_php ?? '', 'updater: PHP requirement read from the release' );
+	WSForm_Monetico_Lab_Test::same( '8.0', $check['response']->requires_php ?? '', 'updater: PHP requirement read from the manifest' );
 
 	$cached = wsform_monetico_test_check_updates( WSForm_Monetico_Fake_Github::release( 'v9.0.0' ), false );
 	WSForm_Monetico_Lab_Test::same( 0, $cached['calls'], 'updater: release cached between checks' );
@@ -59,7 +59,56 @@ function wsform_monetico_test_updater_newer_release() {
 	require_once ABSPATH . 'wp-admin/includes/plugin-install.php';
 	$details = plugins_api( 'plugin_information', array( 'slug' => 'wsform-monetico' ) );
 	WSForm_Monetico_Lab_Test::same( '9.0.0', $details->version ?? '', 'updater: details popup filled' );
-	WSForm_Monetico_Lab_Test::check( false !== strpos( $details->sections['changelog'] ?? '', '<li>Fix something</li>' ), 'updater: release notes shown' );
+	$changelog = $details->sections['changelog'] ?? '';
+	WSForm_Monetico_Lab_Test::check( false !== strpos( $changelog, '<h4>What&#039;s Changed</h4><ul><li>Fix <strong>something</strong> in <a href="https://github.com/willybahuaud/wsform-monetico/pull/1">' ), 'updater: release notes converted from Markdown' );
+	WSForm_Monetico_Lab_Test::check( false !== strpos( $changelog, '<a href="https://github.com/willybahuaud/wsform-monetico/compare/v1.0.0...v1.0.1">' ), 'updater: compare link kept whole' );
+}
+
+/**
+ * "Tested up to" covers the whole branch in the details popup.
+ *
+ * @return void
+ */
+function wsform_monetico_test_updater_tested_branch() {
+	$wordpress_version = get_bloginfo( 'version' );
+	$branch            = implode( '.', array_slice( explode( '.', $wordpress_version ), 0, 2 ) );
+	$default_manifest  = WSForm_Monetico_Fake_Github::$manifest;
+
+	WSForm_Monetico_Fake_Github::$manifest['tested'] = $branch;
+	wsform_monetico_test_check_updates( WSForm_Monetico_Fake_Github::release( 'v9.0.0' ) );
+	$details = plugins_api( 'plugin_information', array( 'slug' => 'wsform-monetico' ) );
+	WSForm_Monetico_Lab_Test::same( $wordpress_version, $details->tested ?? '', 'updater: tested branch matches the running WordPress' );
+
+	WSForm_Monetico_Fake_Github::$manifest = $default_manifest;
+}
+
+/**
+ * Without a manifest, the release is still offered, without requirements.
+ *
+ * @return void
+ */
+function wsform_monetico_test_updater_missing_manifest() {
+	$release           = WSForm_Monetico_Fake_Github::release( 'v9.0.0' );
+	$release['assets'] = array_slice( $release['assets'], 0, 2 );
+	$check             = wsform_monetico_test_check_updates( $release );
+
+	WSForm_Monetico_Lab_Test::same( '9.0.0', $check['response']->new_version ?? '', 'updater: offered without manifest' );
+	WSForm_Monetico_Lab_Test::same( '', $check['response']->requires_php ?? '', 'updater: no requirement without manifest' );
+}
+
+/**
+ * An archive served from outside github.com is ignored.
+ *
+ * @return void
+ */
+function wsform_monetico_test_updater_foreign_host() {
+	$release = WSForm_Monetico_Fake_Github::release( 'v9.0.0' );
+	foreach ( $release['assets'] as $index => $asset ) {
+		$release['assets'][ $index ]['browser_download_url'] = str_replace( 'https://github.com/', 'https://github.com.example.org/', $asset['browser_download_url'] );
+	}
+
+	$check = wsform_monetico_test_check_updates( $release );
+	WSForm_Monetico_Lab_Test::same( null, $check['response'], 'updater: archive outside github.com ignored' );
 }
 
 /**

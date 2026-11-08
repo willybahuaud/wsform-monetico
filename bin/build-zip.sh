@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# Build dist/wsform-monetico-X.Y.Z.zip with a single wsform-monetico/ folder.
+# Build dist/wsform-monetico-X.Y.Z.zip with a single wsform-monetico/ folder,
+# and dist/wsform-monetico-X.Y.Z.json, the requirements read by the updater.
 #
 # Starts from the files git knows (tracked or new, never ignored), so local
 # leftovers never ship, then drops every path listed in .distignore.
@@ -45,5 +46,10 @@ mkdir -p "$root/dist"
 archive="$root/dist/$slug-$version.zip"
 rm -f "$archive"
 (cd "$build_dir" && zip -qr "$archive" "$slug")
+
+requires="$(sed -n 's/^ \* Requires at least: *//p' "$slug.php" | tr -d '[:space:]')"
+requires_php="$(sed -n 's/^ \* Requires PHP: *//p' "$slug.php" | tr -d '[:space:]')"
+tested="$(sed -n 's/^Tested up to: *//p' readme.txt | tr -d '[:space:]')"
+printf '{"requires":"%s","requires_php":"%s","tested":"%s"}\n' "$requires" "$requires_php" "$tested" > "$root/dist/$slug-$version.json"
 
 echo "$archive"
